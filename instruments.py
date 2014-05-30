@@ -40,7 +40,10 @@ def concat_melodies(melodylist):
     return cycle(chain(*melodylist))
 
 def hammond(frequency, drawbar_positions):
-    """Returns a hammond organ-like sound."""
+    """
+    Returns a hammond organ-like sound.
+    NOTE: This will not work until I have coded a flanger.
+    """
     freq_ratio = [0.5, 1.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0]
     drawbars = ()
     for i in range(8):
@@ -50,7 +53,10 @@ def hammond(frequency, drawbar_positions):
 
 def leslie(gen, flan=[1.0, 0.0, 0.6, 1.0], nchannels=1, channel=1, frame=0,
             wet=0.5, feedback=0.5, t_amp=0.1, t_freq=0.0):
-    """Emulates a leslie flanger."""
+    """
+    Emulates a leslie flanger.
+    NOTE: This will not work until I have coded a flanger.
+    """
     flange = flanger(*flan)
     if nchannels == 2:
         left, right = izip(*gen)
@@ -86,35 +92,27 @@ def random_progression(scale, start=1, gen=damped_wave, args):
             yield gen(current)
 
 def flanger():
-    """Emulates a flanger"""
+    """
+    Emulates a flanger.
+    Obviously a stub.
+    """
     yield 1
 
 def chorus():
-    """Emulates a chorus"""
+    """
+    Emulates a chorus.
+    Obviously a stub.
+    """
     yield 1
 
 def delay(gen, delay, frame=0, _n=0, _y=0.0):
-    """Emulates a delay"""
+    """
+    Emulates a delay.
+    Obviously a stub.
+    """
 #    for i, x in count(frame), next(gen):
 #        _n = time-1 % delay
 #        _y = x gen (pref?)
-
-
-
-#(bind-func delay_c
-#  (lambda (max_delay:i64)
-#    (let ((delay max_delay)
-#          (line:SAMPLE* (zalloc delay))
-#(time 0)
-#          (n 0)
-#          (y 0.0))
-#      (lambda (x:SAMPLE wet feedback)
-#        (set! n (modulo time delay))
-#        (set! y (pref line n))
-#        (set! time (+ time 1))
-#        (pset! line n (* feedback (+ x y)))
-#        (+ x (* y wet))))))
-
 
 def make_instrument(suffix, directory_name, path="./instruments/"):
     """Creates a dict of samples that can be played by the instrument"""

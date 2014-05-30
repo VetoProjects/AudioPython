@@ -123,7 +123,6 @@ class Wave_read:
     _data_chunk -- instantiation of a chunk class for the DATA chunk
     _framesize -- size of one frame in the file
     """
-
     def initfp(self, file):
         self._convert = None
         self._soundpos = 0

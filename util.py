@@ -6,7 +6,7 @@ import random
 from itertools import *
 
 """A note lookup table from C0 to B8"""
-note_lookup = {"C0": 16.35, "C#0": 17.32, "D0": 18.35, "D#0": 19.45, 
+note_lookup = {"C0": 16.35, "C#0": 17.32, "D0": 18.35, "D#0": 19.45,
                "E0": 20.60, "F0": 21.83, "F#0": 23.12, "G0": 24.50,
                "G#0": 25.96, "A0": 27.50, "A#0": 29.14, "B0": 30.87,
                "C1": 32.70, "C#1": 34.65, "D1": 36.71, "D#1": 38.89,
@@ -34,7 +34,7 @@ note_lookup = {"C0": 16.35, "C#0": 17.32, "D0": 18.35, "D#0": 19.45,
                "E8": 5274.04, "F8": 5587.65, "F#8": 5919.91, "G8": 6271.93,
                "G#8": 6644.88, "A8": 7040.00, "A#8": 7458.62, "B8": 7902.13}
 
-"""A lookup table of operations"""				
+"""A lookup table of operations"""
 op_codes = {'>': operator.lt, '>=': operator.le, '==': operator.eq,
             '!=': operator.ne, '<=': operator.ge, '<': operator.gt,
             'not': operator.ne, 'is': operator.eq, '+': operator.add,
@@ -96,7 +96,7 @@ def apply_fun(generator, function, args):
 	"""Applies a function to a generator"""
 	while True:
 		yield function(next(generator), *args)
-		
+
 def apply_op(g, h, op):
 	"""Applies the operator to two generators"""
 	if type(op) is str:
