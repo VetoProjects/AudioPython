@@ -5,6 +5,15 @@ import operator
 import random
 from itertools import *
 
+# Experimental python3 compatibility.
+try:
+    from itertools import izip
+except ImportError:
+    izip = zip
+    imap = map
+    izip_longest = zip_longest
+
+
 """A note lookup table from C0 to B8"""
 note_lookup = {"C0": 16.35, "C#0": 17.32, "D0": 18.35, "D#0": 19.45,
                "E0": 20.60, "F0": 21.83, "F#0": 23.12, "G0": 24.50,
@@ -65,7 +74,7 @@ def next_note(current):
     if current < 1:
         current = 1
     if current > 7:
-        current 7
+        current = 7
     x = random.random()
     sum = 0
     for i, prob in enumerate(cadence_markov[current]):

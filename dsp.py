@@ -25,7 +25,7 @@ def square_wave(frequency=440.0, framerate=44100, amplitude=0.5,
         """
         Generates a square wave at a given frequency of infinite length.
         """
-        for s in sine_wave(frequency, framerate, amplitude=1.0, skipframe):
+        for s in sine_wave(frequency, framerate, amplitude=1.0, skipframe=skipframe):
                 yield amplitude * math.tan(rounding * s)
 
 def damped_wave(frequency=440.0, framerate=44100, amplitude=0.5,
@@ -52,7 +52,7 @@ def sawtooth_wave(frequency=440.0, framerate=44100, amplitude=0.5,
                 degree = (2.0 * math.pi * float(frequency) * (float(i) / float(framerate)) % 360.0) / 360
                 yield (-1 + degree * 2) * float(amplitude)
 
-def leaky_integrator(old=0.0, leak=0.99, gen):
+def leaky_integrator(gen, old=0.0, leak=0.99):
     """
     Could be right. Maybe.
     TODO: Testing!
