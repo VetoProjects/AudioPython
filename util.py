@@ -76,11 +76,11 @@ def next_note(current):
     if current > 7:
         current = 7
     x = random.random()
-    sum = 0
+    sumx = 0
     for i, prob in enumerate(cadence_markov[current]):
-        sum += prob
-        if sum >= x:
-            return i+1
+        sumx += prob
+        if sumx >= x:
+            return i
 
 def grouper(n, iterlist, fillvalue=None):
 	"""
