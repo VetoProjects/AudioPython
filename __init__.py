@@ -57,7 +57,7 @@ def write_wavefile(w, samples, nframes=None, nchannels=2, sampwidth=2, framerate
     w.close()
 
 def yield_wavefile(samples, nframes=None, nchannels=2, sampwidth=2, framerate=44100, bufsize=2048):
-    """Write samples to a wavefile."""
+    """Yield Samples."""
     if nframes is None:
         nframes = -1
 
