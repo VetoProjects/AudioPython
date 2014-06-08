@@ -34,7 +34,8 @@ Coming soon.
 Examples
 --------
 
-Coming soon.
+Coming soon. In the meantime, you might have a look at [wavebenders test files](https://github.com/zacharydenton/wavebender),
+they should be largely compatible.
 
 Contribute
 ----------
