@@ -68,7 +68,7 @@ cadence_markov = [[0, 0, 0.25, 0.25, 0.25, 0.35],
 def next_note(current):
     """
     Returns a random next note for the currently played note.
-    Formula shoudl work. Maybe.
+    Formula should work. Maybe.
     TODO: Testing!
     """
     if current < 1:

@@ -29,13 +29,44 @@ The module is very well integrated there and should work pretty good. Try it out
 Usage
 -----
 
-Coming soon.
+To use the library, first do your usual
+
+```python
+from AudioPython import *
+```
+
+If you are already familiar with wavebender, the transition should be mostly smooth.
+The thing that might confuse at first is that there are several submodules to AudioPython
+that were not present in wavebender. A short list to what is there and how to use it:
+
+**dsp**:
+
+This submodule contains the basic waveform: sine, square, sawtooth, triangle, damped, 
+white noise and a leaky integrator.
+
+**instruments**:
+
+This submodule contains more "high level" interfaces, such as make_melody(which creates a melody
+from frequencies), concat_melodies, a hammond organ, a leslie flanger, a random progression
+function if you want to get freaky, and a make_instrument function which creates an instrument
+from a directory of samples. You can get those samples with the function get_sample afterwards.
+
+**util**:
+
+This submodule contains mostly internal functions.
+
+**wave**:
+
+This submodule also contains mostly internal functions for encoding sound as wave files.
+This is largely based on wavebender, only experimental Python 3 support is my work. And that
+is not functional yet. So, basically, I did nothing to it.
 
 Examples
 --------
 
-Coming soon. In the meantime, you might have a look at [wavebenders test files](https://github.com/zacharydenton/wavebender),
-they should be largely compatible.
+Coming soon. In the meantime, you might have a look at 
+[wavebenders test files](https://github.com/zacharydenton/wavebender), they should be largely 
+compatible.
 
 Contribute
 ----------
