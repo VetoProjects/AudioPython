@@ -10,7 +10,7 @@ def make_melody(note_list, length_list, amplitude_list,
                 bar_length=11025, default_length=0.25,
                 default_amplitude=0.5):
     """
-    Returns a melody of notes specified in not_list
+    Returns a melody of notes specified in note_list
     that is mapped to length.
     """
     tones = []

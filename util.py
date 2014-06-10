@@ -95,11 +95,11 @@ def ncycles(iterable, n):
     return chain.from_iterable(repeat(tuple(iterable), n))
 
 def note_to_freq(note):
-        """Translates a note to a corresponding frequency"""
-        try:
-                return note_lookup[note]
-        except KeyError:
-                raise ValueError("No such note. Maybe you chose a flat note?")
+    """Translates a note to a corresponding frequency"""
+    try:
+        return note_lookup[note]
+    except KeyError:
+        raise ValueError("No such note. Maybe you chose a flat note?")
 
 def apply_fun(generator, function, args):
 	"""Applies a function to a generator"""

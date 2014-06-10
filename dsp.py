@@ -54,6 +54,7 @@ def sawtooth_wave(frequency=440.0, framerate=44100, amplitude=0.5,
 
 def leaky_integrator(gen, old=0.0, leak=0.99):
     """
+    Sets up a leaky integrator on top of a given generator.
     Could be right. Maybe.
     TODO: Testing!
     """

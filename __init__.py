@@ -21,7 +21,7 @@ except ImportError:
 __author__ = 'Veit Heller'
 __author_mail__ = 's0539501@htw-berlin.de'
 __version__ = '0.1'
-__url__ = 'http://github.com/hellerv/VetoCodeEditor/audiopython'
+__url__ = 'http://github.com/hellerve/AudioPython'
 __longdescr__ = """
                 An audio library based on wave-bender
                 (https://github.com/zacharydenton/wavebender)
@@ -30,7 +30,7 @@ __longdescr__ = """
 
 def compute_samples(channels, nsamples=None):
     """
-    create a generator which computes the samples.
+    Creates a generator which computes the samples.
 
     essentially it creates a sequence of the sum of each function in the channel
     at each sample in the file for each channel.
