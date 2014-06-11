@@ -80,3 +80,12 @@ def white_noise(amplitude=0.5):
     Generate random samples.
     '''
     return (float(amplitude) * random.uniform(-1, 1) for i in count(0))
+
+#def ringbuffer(gen, phase, decay=1.0, old=None):
+#  """Generates a ringbuffer-like DSP. Sketch."""
+#  old = tee(gen)
+#  for index, i in enumerate(gen):
+#    if index > phase:
+#        gen = old
+#        old = tee(gen)
+#    yield i * decay

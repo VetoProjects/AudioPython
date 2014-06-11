@@ -91,28 +91,44 @@ def random_progression(scale, start=1, gen=damped_wave, args):
         else:
             yield gen(current)
 
-def flanger():
-    """
-    Emulates a flanger.
-    Obviously a stub.
-    """
-    yield 1
+ef chorus(gen, dry=0.5, wet=0.5, depth=1.0, delay=25.0, samplerate=44100,
+    last=0.0):
+  """Emulates a chorus."""
+  adjust = float(samplerate) / 1000
+  delay *= adjust
+  depth *= adjust
+  for i in gen:
+    x = last
+    last = i
+    i = (i / 2 + 0.5) * depth + delay
+    yield i * dry + x * wet
 
-def chorus():
-    """
-    Emulates a chorus.
-    Obviously a stub.
-    """
-    yield 1
 
-def delay(gen, delay, frame=0, _n=0, _y=0.0):
-    """
-    Emulates a delay.
-    Obviously a stub.
-    """
-#    for i, x in count(frame), next(gen):
-#        _n = time-1 % delay
-#        _y = x gen (pref?)
+def flanger(gen, dry=0.5, wet=0.5, depth=25.0, delay=1.0, samplerate=44100,
+    last=0.0):
+  """Emulates a flanger."""
+  adjust = float(rate) / 1000
+  delay *= mil
+  depth *= mil
+  for i in gen:
+    x = last
+    last = i
+    i = (i / 2 + 0.5) * depth + delay
+    yield feedback_modulated_delay(data, modwave, dry, wet)
+
+def tremolo(gen, dry=0.5, wet=0.5):
+  """Emulates a tremolo."""
+  for i in gen:
+    mod = i / 2 + 0.5
+    yield (mod / 2 + 0.5)  * dry + (i * mod) * wet
+
+
+def modulated_delay(gen, dry, wet, last=0.0):
+  """Emulates a modulated delay."""
+  for i in gen:
+    x = last
+    last = i
+    yield i * dry + x * wet
 
 def make_instrument(suffix, directory_name, path="./instruments/"):
     """Creates a dict of samples that can be played by the instrument"""
