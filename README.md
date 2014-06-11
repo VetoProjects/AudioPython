@@ -47,9 +47,10 @@ white noise and a leaky integrator.
 **instruments**:
 
 This submodule contains more "high level" interfaces, such as make_melody(which creates a melody
-from frequencies), concat_melodies, a hammond organ, a leslie flanger, a random progression
-function if you want to get freaky, and a make_instrument function which creates an instrument
-from a directory of samples. You can get those samples with the function get_sample afterwards.
+from frequencies), concat_melodies, a hammond organ, a leslie flanger, a regular one, a delay,
+a chorus, a random progression function if you want to get freaky, and a make_instrument function
+which creates an instrument from a directory of samples. You can get those samples with the function
+get_sample afterwards.
 
 **util**:
 
@@ -74,8 +75,7 @@ Contribute
 This work is potentially never-ending. DSPs, Sound Effects, Instruments, all of them can
 be produced in AudioPython and a few of them will be.
 
-I personally am engaged in a flanger, a delay, a reverb and chorus, because based on that,
-a few more instruments are possible. 
+I personally am engaged in a reverb, a ringbuffer and pink noise.
 
 Also, many of the functions are basically untested and need to be tested. Sadly, I am not
 very creative at the moment, which means I cannot come up with enough ways to break my code.
