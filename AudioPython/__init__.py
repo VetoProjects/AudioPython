@@ -31,6 +31,7 @@ __classifiers__ = [
             'Topic :: Multimedia :: Sound/Audio',
             'Topic :: Multimedia :: Sound/Audio :: Sound Synthesis'
             ]
+__keywords__ = ['audio', 'live coding', 'music']
 
 def compute_samples(channels, nsamples=None):
     """
