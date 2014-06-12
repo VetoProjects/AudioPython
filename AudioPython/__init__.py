@@ -27,6 +27,10 @@ __longdescr__ = """
                 (https://github.com/zacharydenton/wavebender)
                 for live coding music.
                 """
+__classifiers__ = [
+            'Topic :: Multimedia :: Sound/Audio',
+            'Topic :: Multimedia :: Sound/Audio :: Sound Synthesis'
+            ]
 
 def compute_samples(channels, nsamples=None):
     """

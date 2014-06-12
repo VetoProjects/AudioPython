@@ -60,17 +60,18 @@ def leslie(gen, flan=[1.0, 0.0, 0.6, 1.0], nchannels=1, channel=1, frame=0,
     flange = flanger(*flan)
     if nchannels == 2:
         left, right = izip(*gen)
-        return (leslie(left), leslie(right, channel=2))
+        for soundl, soundr in leslie(left), leslie(right, channel=2):
+            yield (soundl, soundr)
     elif nchannels == 1:
         tf = t_freq if channel == 1 else t_freq*1.1
         for i in count(frame):
             ret = 0
             for sound in gen:
-                ret += next(flange(sound, wet, feedback)) *
-                       next(tremolo(t_amp, tf) + 1.0
-            yield ret
+                ret += (next(flange(sound, wet, feedback)) *
+                       next(tremolo(t_amp, tf)) + 1.0)
+                yield ret
 
-def random_progression(scale, start=1, gen=damped_wave, args):
+def random_progression(scale, start=1, gen=damped_wave, args=None):
     """
     Yields a random progression.
     Formula should work. Maybe.
@@ -91,7 +92,7 @@ def random_progression(scale, start=1, gen=damped_wave, args):
         else:
             yield gen(current)
 
-ef chorus(gen, dry=0.5, wet=0.5, depth=1.0, delay=25.0, samplerate=44100,
+def chorus(gen, dry=0.5, wet=0.5, depth=1.0, delay=25.0, samplerate=44100,
     last=0.0):
   """Emulates a chorus."""
   adjust = float(samplerate) / 1000
