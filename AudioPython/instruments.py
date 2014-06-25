@@ -7,7 +7,10 @@ from itertools import *
 from util import *
 from effects import *
 
-def make_melody(note_list, length_list, amplitude_list,
+def ncycles(iterable, n):
+    return chain.from_iterable(repeat(tuple(iterable), n))
+
+def make_melody(note_list, length_list=[], amplitude_list=[],
                 bar_length=11025, default_length=0.25,
                 default_amplitude=0.5):
     """
@@ -17,7 +20,7 @@ def make_melody(note_list, length_list, amplitude_list,
     tones = []
     second_length = len(length_list)
     third_length = len(amplitude_list)
-    for note, index in enumerate(note_list):
+    for index, note in enumerate(note_list):
         if type(note) is str:
             note = note_to_freq(note)
         if index < second_length:
@@ -27,11 +30,12 @@ def make_melody(note_list, length_list, amplitude_list,
         if index < third_length:
             amp = amplitude_list[index]
         else:
-            length = default_amplitde
+            amp = default_amplitude
+        print(note, amp, length)
         tones.append(islice(damped_wave(frequency=note, amplitude=amp,
                                         length=length),
                             bar_length))
-    return cycle(chain(*tones))
+    return cycle(chain(chain(*tones)))
 
 def concat_melodies(melodylist):
     """
