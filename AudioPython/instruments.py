@@ -31,7 +31,6 @@ def make_melody(note_list, length_list=[], amplitude_list=[],
             amp = amplitude_list[index]
         else:
             amp = default_amplitude
-        print(note, amp, length)
         tones.append(islice(damped_wave(frequency=note, amplitude=amp,
                                         length=length),
                             bar_length))

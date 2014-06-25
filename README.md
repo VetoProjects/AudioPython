@@ -65,9 +65,11 @@ is not functional yet. So, basically, I did nothing to it.
 Examples
 --------
 
-Coming soon. In the meantime, you might have a look at 
-[wavebenders test files](https://github.com/zacharydenton/wavebender), they should be largely 
-compatible.
+I included a examples directory where some of the most basic features are shown. You can tweak them
+and experiment with them, they should be a little introduction.
+
+You might also have a look at [wavebenders test files](https://github.com/zacharydenton/wavebender), 
+they should be compatible.
 
 Contribute
 ----------
