@@ -57,7 +57,10 @@ def modulated_delay(gen, dry, wet, last=0.0):
 
 def biquad_filter(gen, last=0.0, lastmixed=0.0, beforelast=0.0,
         beforelastmixed=0.0):
-    """Emulates a biquad filter."""
+    """
+    Emulates a biquad filter.
+    STUB! Factors are unclear.
+    """
     for i in gen:
         beforelast = last
         last = i
