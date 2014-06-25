@@ -11,5 +11,5 @@ def waves():
 
 channels = ((waves(),), (waves(), dsp.white_noise(amplitude=0.001),))
 
-samples = compute_samples(channels, None)
-write_wavefile("temp.wav", samples, None)
+samples = compute_samples(channels)
+write_wavefile("temp.wav", samples)
