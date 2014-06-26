@@ -77,7 +77,7 @@ Contribute
 This work is potentially never-ending. DSPs, Sound Effects, Instruments, all of them can
 be produced in AudioPython and a few of them will be.
 
-I personally am engaged in a reverb, a ringbuffer and pink noise.
+I personally am engaged in a reverb, a ringbuffer, pink noise and a bi-quad-filter.
 
 Also, many of the functions are basically untested and need to be tested. Sadly, I am not
 very creative at the moment, which means I cannot come up with enough ways to break my code.
