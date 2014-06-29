@@ -57,7 +57,7 @@ op_codes = {'>': operator.lt, '>=': operator.le, '==': operator.eq,
 A markov matrix for ratios when which cadence is usually played
 (useful for random progressions).
 """
-cadence_markov = [[0, 0, 0.25, 0.25, 0.25, 0.35],
+cadence_markov = [[0, 0, 0.25, 0.25, 0.25, 0.25],
                   [0, 0, 0, 0, 0.5, 0, 0.5],
                   [0, 0, 0, 0, 0, 1],
                   [0.25, 0.25, 0, 0, 0.25, 0, 0.25],
@@ -113,5 +113,5 @@ def apply_op(g, h, op):
 			op = op_codes[op]
 		except KeyError:
 			ArithmeticError("No such operation on generators.")
-	while True:
+	while g and h:
 		yield op(next(g), next(h))
