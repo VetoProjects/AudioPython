@@ -16,6 +16,8 @@ def make_melody(note_list, length_list=[], amplitude_list=[],
     """
     Returns a melody of notes specified in note_list
     that is mapped to length.
+    TODO: At the moment, no part of the melody can be
+        repeated. Make it possible.
     """
     tones = []
     second_length = len(length_list)
@@ -46,7 +48,6 @@ def concat_melodies(melodylist):
 def hammond(frequency, drawbar_positions):
     """
     Returns a hammond organ-like sound.
-    NOTE: This will not work until I have coded a flanger.
     """
     freq_ratio = [0.5, 1.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0]
     drawbars = ()
