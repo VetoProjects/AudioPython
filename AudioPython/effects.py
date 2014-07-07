@@ -55,15 +55,16 @@ def modulated_delay(gen, dry, wet, last=0.0):
     last = i
     yield i * dry + x * wet
 
-def biquad_filter(gen, last=0.0, lastmixed=0.0, beforelast=0.0,
-        beforelastmixed=0.0):
+def biquad_filter(gen, b0=0.0, b1=0.0, b2=0.0, a0=0.0, a1=0.0, a2=0.0):
     """
-    Emulates a biquad filter.
+    Emulates a biquad filter. Still don't have a clue.
     STUB! Factors are unclear.
     """
     for i in gen:
-        beforelast = last
-        last = i
-        beforelastmixed = lastmixed
-        lastmixed = i +last + lastmixed + beforelast + beforelastmixed
-        return lastmixed
+        yield i
+    #for i in gen:
+    #    beforelast = last
+    #    last = i
+    #    beforelastmixed = lastmixed
+    #    lastmixed = (lastmixed/last)*i + (beforelastmixed/last)*i + beforelastmixed
+    #    return lastmixed
