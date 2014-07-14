@@ -55,16 +55,35 @@ def modulated_delay(gen, dry, wet, last=0.0):
     last = i
     yield i * dry + x * wet
 
-def biquad_filter(gen, b0=0.0, b1=0.0, b2=0.0, a0=0.0, a1=0.0, a2=0.0):
+def lowpass(gen, cutoff, sample=44100):
+    """Emulates a lowpass filter(butterworth)."""
+    coeff = 1.0 / math.tan(math.pi * cutoff / sample)
+    b0 = 1.0 / ( 1.0 + math.sqrt(2.0) * coeff + coeff * coeff)
+    b1 = 2.0 * b0
+    b2 = b0
+    a1 = 2.0 * b0 * (1.0 - coeff * coeff)
+    a2 = b0 * (1.0 - sqrt(2.0) * coeff + coeff * coeff)
+    for i in biquadfilter(gen, b0, b1, b2, a1, a2): yield i
+
+def lowpass(gen, cutoff, sample=44100):
+    """Emulates a highpass filter(butterworth)."""
+    coeff = math.tan(math.pi * cutoff / sample)
+    b0 = 1.0 / ( 1.0 + math.sqrt(2.0) * coeff + coeff * coeff)
+    b1 = -2.0 * b0
+    b2 = b0
+    a1 = 2.0 * b0 * (coeff * coeff -1.0)
+    a2 = b0 * (1.0 - sqrt(2.0) * coeff + coeff * coeff)
+    for i in biquadfilter(gen, b0, b1, b2, a1, a2): yield i
+
+def biquad_filter(gen, b0=0.0, b1=0.0, b2=0.0, a1=0.0, a2=0.0,
+    y = 0.0, y1=0.0, x1=0, x2=0):
     """
-    Emulates a biquad filter. Still don't have a clue.
-    STUB! Factors are unclear.
+    Emulates a biquad filter. Ugly variable names, but if you know biquad,
+    they should look familiar to you, as they are mostly named the same
+    in examples.
     """
-    for i in gen:
-        yield i
-    #for i in gen:
-    #    beforelast = last
-    #    last = i
-    #    beforelastmixed = lastmixed
-    #    lastmixed = (lastmixed/last)*i + (beforelastmixed/last)*i + beforelastmixed
-    #    return lastmixed
+    for x in gen:
+        y = b0 * x + b1 * x1 + b2 * x2 - a1 * y - a2 * y1
+        y1 = y
+        x1, x2 = x, x1
+        yield y
