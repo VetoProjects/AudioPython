@@ -55,9 +55,9 @@ def modulated_delay(gen, dry, wet, last=0.0):
     last = i
     yield i * dry + x * wet
 
-def lowpass(gen, cutoff, sample=44100):
+def lowpass(gen, cutoff, samplerate=44100):
     """Emulates a lowpass filter(butterworth)."""
-    coeff = 1.0 / math.tan(math.pi * cutoff / sample)
+    coeff = 1.0 / math.tan(math.pi * cutoff / samplerate)
     b0 = 1.0 / ( 1.0 + math.sqrt(2.0) * coeff + coeff * coeff)
     b1 = 2.0 * b0
     b2 = b0
@@ -65,9 +65,9 @@ def lowpass(gen, cutoff, sample=44100):
     a2 = b0 * (1.0 - sqrt(2.0) * coeff + coeff * coeff)
     for i in biquadfilter(gen, b0, b1, b2, a1, a2): yield i
 
-def lowpass(gen, cutoff, sample=44100):
+def highpass(gen, cutoff, samplerate=44100):
     """Emulates a highpass filter(butterworth)."""
-    coeff = math.tan(math.pi * cutoff / sample)
+    coeff = math.tan(math.pi * cutoff / samplerate)
     b0 = 1.0 / ( 1.0 + math.sqrt(2.0) * coeff + coeff * coeff)
     b1 = -2.0 * b0
     b2 = b0
