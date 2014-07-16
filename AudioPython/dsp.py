@@ -5,6 +5,7 @@ import math
 import random
 from itertools import *
 from util import *
+from effects import *
 
 def sine_wave(frequency=440.0, framerate=44100, amplitude=0.5,
                           skip_frame=0):
@@ -76,10 +77,13 @@ def triangle_wave(frequency=440.0, framerate=44100, amplitude=0.5, skip_frame=0,
         return old * 0.125
 
 def white_noise(amplitude=0.5):
-    '''
-    Generate random samples.
-    '''
+    """Generates random samples."""
     return (float(amplitude) * random.uniform(-1, 1) for i in count(0))
+
+def pink_noise(amplitude=0.5, cutoff=100, samplerate=44100):
+    """Generates pink noise based on Voss' algorithm."""
+    return lowpass(white_noise(amplitude), cutoff=cutoff, samplerate)
+
 
 #def ringbuffer(gen, phase, decay=1.0, old=None):
 #  """Generates a ringbuffer-like DSP. Sketch."""
