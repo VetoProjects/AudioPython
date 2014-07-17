@@ -80,9 +80,25 @@ def white_noise(amplitude=0.5):
     """Generates random samples."""
     return (float(amplitude) * random.uniform(-1, 1) for i in count(0))
 
-def pink_noise(amplitude=0.5, cutoff=100, samplerate=44100):
+def pink_noise(amplitude=0.5, ranged=128):
     """Generates pink noise based on Voss' algorithm."""
-    return lowpass(white_noise(amplitude), cutoff=cutoff, samplerate)
+    max_pos = 0x1f # five bits set
+    pos = 0
+    white_values = [0, 0, 0, 0, 0]
+    for i in range(5):
+        white_values[i] = random.randint(0, ranged//5)
+    for x in count(0):
+        last_pos = pos
+        sumd = 0
+        pos += 1
+        if(pos > max_pos): key = 0
+        diff = last_pos ^ pos
+        for i in range(5):
+            if(diff & ( 1 << i)):
+                white_values[i] = random.randint(0, ranged//5)
+            sumd += white_values[i]
+        yield int(sumd * amplitude)
+
 
 
 #def ringbuffer(gen, phase, decay=1.0, old=None):
