@@ -101,7 +101,7 @@ def pink_noise(amplitude=0.5, ranged=128):
             if(diff & ( 1 << i)):
                 white_values[i] = random.randint(0, ranged//5)
             sumd += white_values[i]
-        yield int(sumd * amplitude)
+        yield sumd * amplitude / 10
 
 
 
