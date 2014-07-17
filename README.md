@@ -2,6 +2,7 @@ AudioPython
 ===========
 
 ![MIT Licensed!](http://img.shields.io/badge/license-mit-blue.svg)
+![MIT Licensed!](http://img.shields.io/badge/version-0.2.3-yellow.svg)
 
 An audio module for Python that is included in a Live Coding Environment I currently work on;
 it is based on [wavebender](https://github.com/zacharydenton/wavebender/) and relies heavily
