@@ -63,25 +63,29 @@ def leaky_integrator(gen, old=0.0, leak=0.99):
         old = leak * old + i
         yield old
 
-def triangle_wave(frequency=440.0, framerate=44100, amplitude=0.5, skip_frame=0,
-                  old=0.0, new=0.0, leak=0.9):
+def triangle_wave(frequency=440.0, framerate=44100, amplitude=0.5,
+        skip_frame=100.0):
     """
     Generates a triangle wave at a given frequency of infinite length.
-    Formula could be right. Maybe.
-    TODO: Testing!
     """
+    if type(frequency) is str:
+        frequency = note_to_freq(frequency)
     if amplitude > 1.0: amplitude = 1.0
     if amplitude < 0.0: amplitude = 0.0
-    for i in sine_wave(frequency, framerate, amplitude, skip_frame):
-        old = leak * old + amplitude * i + math.tan(n * i)
-        return old * 0.125
+    for i in count(skip_frame):
+        skip_frame += 0.0000114 # coefficient i found by playing around
+        yield (abs(1 - (2 * skip_frame * frequency) % 2) * 2 - 1) * amplitude
 
 def white_noise(amplitude=0.5):
     """Generates random samples."""
+    if amplitude > 1.0: amplitude = 1.0
+    if amplitude < 0.0: amplitude = 0.0
     return (float(amplitude) * random.uniform(-1, 1) for i in count(0))
 
 def pink_noise(amplitude=0.5, ranged=128):
     """Generates pink noise based on Voss' algorithm."""
+    if amplitude > 1.0: amplitude = 1.0
+    if amplitude < 0.0: amplitude = 0.0
     max_pos = 0x1f # five bits set
     pos = 0
     white_values = [0, 0, 0, 0, 0]
