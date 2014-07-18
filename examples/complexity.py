@@ -28,8 +28,6 @@ bassline = [
 ]
 
 
-print(melodies)
-
 def melody(t = 0):
     counter = 0
     for i in count(0):
