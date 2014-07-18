@@ -65,6 +65,40 @@ cadence_markov = [[0, 0, 0.25, 0.25, 0.25, 0.25],
                   [0, 0.5, 0, 0.5],
                   [0.5, 0, 0, 0, 0.5]]
 
+def unipolar(signal):
+    """
+    Inverse to bipolar().
+    Converts a bipolar signal to an unipolar signal.
+    """
+    return signal * 0.5 + 0.5
+
+def bipolar(signal):
+    """
+    Inverse to unipolar().
+    Converts an unipolar signal to a bipolar signal.
+    """
+    return signal * 2.0 - 1.0
+
+def mix(a, b, tau):
+    """Linear interpolation for two samples."""
+    t = clamp(t, 0.0, 1.0)
+    return a*(1-t) + b*t
+
+def clamp(x, mi, ma):
+    """Clips a value between minimum and maximum."""
+    return max(mi, min(ma, x))
+
+def sync():
+    """Resets phase with another signal."""
+    previous = 0
+    start = 0
+    def internal(signal, t, prev=previous, s=start):
+        if prev < 0 and signal >= 0:
+            s = t
+        previous = signal
+        return t - s
+    return internal
+
 def next_note(current):
     """
     Returns a random next note for the currently played note.
