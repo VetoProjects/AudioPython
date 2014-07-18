@@ -1,3 +1,6 @@
+import math
+from AudioPython import util
+
 def leslie(gen, flan=[1.0, 0.0, 0.6, 1.0], nchannels=1, channel=1, frame=0,
             wet=0.5, feedback=0.5, t_amp=0.1, t_freq=0.0):
     """
@@ -62,8 +65,8 @@ def lowpass(gen, cutoff, samplerate=44100):
     b1 = 2.0 * b0
     b2 = b0
     a1 = 2.0 * b0 * (1.0 - coeff * coeff)
-    a2 = b0 * (1.0 - sqrt(2.0) * coeff + coeff * coeff)
-    for i in biquadfilter(gen, b0, b1, b2, a1, a2): yield i
+    a2 = b0 * (1.0 - math.sqrt(2.0) * coeff + coeff * coeff)
+    for i in biquad_filter(gen, b0, b1, b2, a1, a2): yield i
 
 def highpass(gen, cutoff, samplerate=44100):
     """Emulates a highpass filter(butterworth)."""
@@ -72,18 +75,18 @@ def highpass(gen, cutoff, samplerate=44100):
     b1 = -2.0 * b0
     b2 = b0
     a1 = 2.0 * b0 * (coeff * coeff -1.0)
-    a2 = b0 * (1.0 - sqrt(2.0) * coeff + coeff * coeff)
-    for i in biquadfilter(gen, b0, b1, b2, a1, a2): yield i
+    a2 = b0 * (1.0 - math.sqrt(2.0) * coeff + coeff * coeff)
+    for i in biquad_filter(gen, b0, b1, b2, a1, a2): yield i
 
 def biquad_filter(gen, b0=0.0, b1=0.0, b2=0.0, a1=0.0, a2=0.0,
-    y = 0.0, y1=0.0, x1=0, x2=0):
+    y = 0.0, y1=0.0, y2=0.0, x1=0.0, x2=0.0):
     """
     Emulates a biquad filter. Ugly variable names, but if you know biquad,
     they should look familiar to you, as they are mostly named the same
     in examples.
     """
     for x in gen:
-        y = b0 * x + b1 * x1 + b2 * x2 - a1 * y - a2 * y1
-        y1 = y
+        y = b0 * x + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2
+        y1, y2 = y, y1
         x1, x2 = x, x1
         yield y
