@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import os
-from dsp import *
-from itertools import *
-from util import *
-from effects import *
+
+from .dsp import *
+from .itertools import *
+from .util import *
+from .effects import *
 
 def ncycles(iterable, n):
     return chain.from_iterable(repeat(tuple(iterable), n))

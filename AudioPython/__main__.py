@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from wavebender import *
+from AudioPython import *
 
 main()

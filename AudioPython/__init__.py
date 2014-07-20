@@ -6,9 +6,9 @@ import struct
 import argparse
 from itertools import *
 
-import wave
-from util import *
-from dsp import *
+from . import wave
+from .util import *
+from .dsp import *
 
 # Experimental python3 compatibility.
 try:
@@ -61,8 +61,8 @@ def write_wavefile(w, samples, nframes=None, nchannels=2, sampwidth=2, framerate
 
     w.close()
 
-def yield_wavefile(samples, nframes=None, nchannels=2, sampwidth=2, framerate=44100, bufsize=2048):
-    """Yield Samples."""
+def yield_raw(samples, nframes=None, nchannels=2, sampwidth=2, framerate=44100, bufsize=2048):
+    """Yield Raw Samples."""
     if nframes is None:
         nframes = -1
 

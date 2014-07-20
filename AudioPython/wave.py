@@ -73,8 +73,6 @@ The close() method is called automatically when the class instance
 is destroyed.
 """
 
-import sys
-
 try:
     import __builtin__
 except ImportError:
@@ -112,7 +110,14 @@ if struct.pack("h", 1) == "\000\001":
 else:
     big_endian = 0
 
+import sys
 from chunk import Chunk
+
+def _byteswap3(data):
+    ba = bytearray(data)
+    ba[::3] = data[2::3]
+    ba[2::3] = data[::3]
+    return bytes(ba)
 
 class Wave_read:
     """Variables used in this class:
@@ -442,11 +447,14 @@ _datawritten -- the size of the audio samples actually written
         if self._sampwidth > 1 and big_endian:
             import array
             data = array.array(_array_fmts[self._sampwidth], data)
-            data.byteswap()
+            if sys.version[0] > 3:
+                data = _byteswap3(data)
+            else:
+                data.byteswap()
             data.tofile(self._file)
             self._datawritten = self._datawritten + len(data) * self._sampwidth
         else:
-            self._file.write(data)
+            self._file.write(bytes(data, "ASCII"))
             self._datawritten = self._datawritten + len(data)
         self._nframeswritten = self._nframeswritten + nframes
 
@@ -504,11 +512,11 @@ _datawritten -- the size of the audio samples actually written
     def _write_header3(self, initlength):
         self._file.write(bytes('RIFF', 'UTF-8'))
         if not self._nframes:
-            self._nframes = initlength / (self._nchannels * self._sampwidth)
+            self._nframes = initlength // (self._nchannels * self._sampwidth)
         self._datalength = self._nframes * self._nchannels * self._sampwidth
         self._form_length_pos = 4
-        wave_header_format = '<l4s4slhhllhh4s'
-        self._file.write(struct.Struct.pack(wave_header_format,
+        wave_header_format = '<L4s4sLHHLLHH4s'
+        self._file.write(struct.pack('<L4s4sLHHLLHH4s',
             36 + self._datalength, b'WAVE', b'fmt ', 16,
             WAVE_FORMAT_PCM, self._nchannels, self._framerate,
             self._nchannels * self._framerate * self._sampwidth,

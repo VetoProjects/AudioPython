@@ -4,8 +4,9 @@
 import math
 import random
 from itertools import *
-from util import *
-from effects import *
+
+from .util import *
+from .effects import *
 
 def sine_wave(frequency=440.0, framerate=44100, amplitude=0.5,
                           skip_frame=0):

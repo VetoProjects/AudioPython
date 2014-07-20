@@ -1,5 +1,6 @@
 import math
-from AudioPython import util
+
+from .import util
 
 def leslie(gen, flan=[1.0, 0.0, 0.6, 1.0], nchannels=1, channel=1, frame=0,
             wet=0.5, feedback=0.5, t_amp=0.1, t_freq=0.0):
