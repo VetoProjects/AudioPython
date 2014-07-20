@@ -16,7 +16,7 @@ Table of Contents
 1. **[Requirements](#requirements)**
 2. **[Usage](#usage)**
 3. **[Examples](#examples)**
-3. **[Contribute](#contribute)**
+4. **[Contribute](#contribute)**
 
 Requirements
 ------------
@@ -68,11 +68,8 @@ is not functional yet. So, basically, I did nothing to it.
 Examples
 --------
 
-I included a examples directory where some of the most basic features are shown. You can tweak them
+I included a examples directory where some of the most useful features are shown. You can tweak them
 and experiment with them, they should be a little introduction.
-
-You might also have a look at [wavebenders test files](https://github.com/zacharydenton/wavebender), 
-they should be compatible.
 
 Contribute
 ----------
@@ -80,9 +77,10 @@ Contribute
 This work is potentially never-ending. DSPs, Sound Effects, Instruments, all of them can
 be produced in AudioPython and a few of them will be.
 
-I personally am engaged in a reverb, a ringbuffer and pink noise.
+I personally am engaged in a reverb and a ringbuffer, but I found new things I want to add every few
+days, so I am not really likely to stick to my schedule.
 
-Also, many of the functions are basically untested and need to be tested. Sadly, I am not
-very creative at the moment, which means I cannot come up with enough ways to break my code.
-You can do that for me, if you want to. Even better if you can fix it afterwards, but if you cannot 
-or do not want to, just drop me a few lines so I know the problem exists.
+Also, some of the functions(especially the ones involving real samples) are basically untested and 
+need to be tested. Sadly, I am not very creative at the moment, which means I cannot come up with 
+enough ways to break my code. You can do that for me, if you want to. Even better if you can fix it 
+afterwards, but if you cannot or do not want to, just drop me a few lines so I know the problem exists.
