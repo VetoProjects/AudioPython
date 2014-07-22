@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import pickle
 from AudioPython import *
 from AudioPython import instruments, dsp, effects
 
@@ -13,5 +14,11 @@ channels = ((effects.lowpass(waves(), 90),),
         (effects.lowpass(waves(), 90),),)
 
 samples = compute_samples(channels)
-for i in range(10):
-    yield_raw(samples)
+
+with open("check", "r") as f:
+    p = pickle.Unpickler(f)
+    for i, sample in enumerate(yield_raw(samples)):
+        if p.load() != sample:
+            raise ValueError("%s yielded wrong value on %s call." %
+                    (__file__, i))
+        if i == 1000: break

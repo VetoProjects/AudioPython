@@ -3,8 +3,9 @@
 
 import os
 
+from itertools import *
+
 from .dsp import *
-from .itertools import *
 from .util import *
 from .effects import *
 
