@@ -8,6 +8,7 @@ SOURCES=$(wildcard csrc/*.c)
 
 #Makes everything
 all:
+	mkdir $(BUILDDIR)
 	g++ $(CFLAGS) $(SOURCES) -o $(BUILDDIR)$(TARGET)
 
 #Uses picky extensions and makes everything(Extensions may break compiling)
