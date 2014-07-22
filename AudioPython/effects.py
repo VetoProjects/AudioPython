@@ -1,6 +1,6 @@
 import math
 
-from itertools import count, izip
+from itertools import izip
 
 from . import util
 
@@ -17,7 +17,7 @@ def leslie(gen, flan=[1.0, 0.0, 0.6, 1.0], nchannels=1, channel=1, frame=0,
             yield (soundl, soundr)
     elif nchannels == 1:
         tf = t_freq if channel == 1 else t_freq*1.1
-        for i in count(frame):
+        while True:
             ret = 0
             for sound in gen:
                 ret += (next(flange(sound, wet, feedback)) *

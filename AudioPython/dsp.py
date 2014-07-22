@@ -50,7 +50,7 @@ def sawtooth_wave(frequency=440.0, framerate=44100, amplitude=0.5,
         frequency = note_to_freq(frequency)
     if amplitude > 1.0: amplitude = 1.0
     if amplitude < 0.0: amplitude = 0.0
-    for i in count(skip_frame):
+    while True:
         degree = (2.0 * math.pi * float(frequency) * (float(i) / float(framerate)) % 360.0) / 360
         yield (-1 + degree * 2) * float(amplitude)
 
@@ -73,7 +73,7 @@ def triangle_wave(frequency=440.0, framerate=44100, amplitude=0.5,
         frequency = note_to_freq(frequency)
     if amplitude > 1.0: amplitude = 1.0
     if amplitude < 0.0: amplitude = 0.0
-    for i in count(skip_frame):
+    while True:
         skip_frame += 0.0000114 # coefficient i found by playing around
         yield (abs(1 - (2 * skip_frame * frequency) % 2) * 2 - 1) * amplitude
 
@@ -92,7 +92,7 @@ def pink_noise(amplitude=0.5, ranged=128):
     white_values = [0, 0, 0, 0, 0]
     for i in range(5):
         white_values[i] = random.randint(0, ranged//5)
-    for x in count(0):
+    while True:
         last_pos = pos
         sumd = 0
         pos += 1

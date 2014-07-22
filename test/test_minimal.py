@@ -16,7 +16,7 @@ def minimal():
 def test_minimal():
     channels = ((minimal(),),)
     samples = compute_samples(channels)
-    for i in range(10):
+    for i in range(1000):
         yield_raw(samples)
 
 if __name__ == "__main__":

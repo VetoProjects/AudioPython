@@ -6,7 +6,7 @@ def test_sine():
                 (sine_wave("C5", amplitude=0.1),))
 
     samples = compute_samples(channels)
-    for i in range(10):
+    for i in range(1000):
         yield_raw(samples)
 
 if __name__ == "__main__":

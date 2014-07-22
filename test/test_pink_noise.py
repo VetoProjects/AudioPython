@@ -7,7 +7,7 @@ def test_pink_noise():
     channels = ((pink_noise(amplitude=0.01),),)
 
     samples = compute_samples(channels)
-    for i in range(10):
+    for i in range(1000):
         yield_raw(samples)
 
 if __name__ == "__main__":

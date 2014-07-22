@@ -2,7 +2,6 @@
 #Idea taken from www.wavepot.com
 import math
 
-from itertools import count
 from AudioPython import *
 
 transpose = 2.0
@@ -30,7 +29,7 @@ bassline = [
 
 def melody(t = 0):
     counter = 0
-    for i in count(0):
+    while True:
         t += 0.000013 # try setting that to 1. its... interesting
         counter = math.floor(t/spb) #How many beats have passed
         #Changes note every 8beat, alter chord every 16 beats
@@ -46,7 +45,7 @@ def sqr(t,f,a):
 def test_complex():
     channels = ((melody(1),),)
     samples = compute_samples(channels)
-    for i in range(10):
+    for i in range(1000):
         yield_raw(samples)
 
 if __name__ == "__main__":
