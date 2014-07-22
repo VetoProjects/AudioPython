@@ -454,7 +454,7 @@ _datawritten -- the size of the audio samples actually written
             data.tofile(self._file)
             self._datawritten = self._datawritten + len(data) * self._sampwidth
         else:
-            self._file.write(bytes(data, "ASCII"))
+            self._file.write(data)
             self._datawritten = self._datawritten + len(data)
         self._nframeswritten = self._nframeswritten + nframes
 
