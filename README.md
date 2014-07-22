@@ -2,7 +2,7 @@ AudioPython
 ===========
 
 ![MIT Licensed!](http://img.shields.io/badge/license-mit-blue.svg)
-![Version 0.2.3](http://img.shields.io/badge/version-0.2.3-yellow.svg)
+![Version 0.2.3](http://img.shields.io/badge/version-0.3.0-yellow.svg)
 [![Build Status](https://travis-ci.org/hellerve/AudioPython.png?branch=master)](https://travis-ci.org/hellerve/AudioPython)
 
 An audio module for Python that is included in a Live Coding Environment I currently work on;
@@ -24,12 +24,8 @@ Requirements
 ------------
 
 The library is based on Python2.7. Even though I work on support for Python3.x, it is not
-working, because I have problems with Pythons `struct` module. So at the moment all you need
-is a working installation of Python. 
-
-I have not yet concocted setuptools integration, because it really is a subproject for 
-[a live coding editor](https://github.com/hellerve/Veto-LiveCoding) I am currently working on. 
-The module is very well integrated there and should work pretty good. Try it out!
+working, because I have problems with unifying Pythons `wave` module. So at the moment all 
+you need is a working installation of Python2.7. 
 
 Installation
 ------------
