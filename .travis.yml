@@ -10,4 +10,4 @@ install:
 script: 
     - python setup.py install
     - nosetests
-    - make clean && make cython && make all && make clean && sudo make install && sudo make uninstall
+    - make clean && make cython && make all && sudo make install && sudo make uninstall && make clean && make clean
