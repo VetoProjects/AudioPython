@@ -92,7 +92,8 @@ def sync():
     """Resets phase with another signal."""
     previous = 0
     start = 0
-    def internal(signal, tau):
+    def internal(signal, tau, previous=previous, start=start):
+        """I know. Named keywords are only there because of cython."""
         if previous < 0 and signal >= 0:
             start = tau
         previous = signal
