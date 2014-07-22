@@ -92,29 +92,25 @@ def sync():
     """Resets phase with another signal."""
     previous = 0
     start = 0
-    def internal(signal, t, prev=previous, s=start):
-        if prev < 0 and signal >= 0:
-            s = t
+    def internal(signal, tau):
+        if previous < 0 and signal >= 0:
+            start = tau
         previous = signal
-        yield t - s
+        yield tau - start
     return internal
 
 def next_note(current):
-    """
-    Returns a random next note for the currently played note.
-    Formula should work. Maybe.
-    TODO: Testing!
-    """
-    if current < 1:
-        current = 1
-    if current > 7:
-        current = 7
+    """Returns a random next note for the currently played note."""
+    current = current - 1
+    if 7 < current < 0:
+        return ValueError("Not a valid note value.")
     x = random.random()
     sumx = 0
-    for i, prob in enumerate(cadence_markov[current]):
-        sumx += prob
-        if sumx >= x:
-            return i
+    i = 0
+    while sumx < x:
+        sumx += cadence_markov[current][i]
+        i += 1
+    return i
 
 def grouper(n, iterlist, fillvalue=None):
     """
