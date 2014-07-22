@@ -96,7 +96,7 @@ def sync():
         if prev < 0 and signal >= 0:
             s = t
         previous = signal
-        return t - s
+        yield t - s
     return internal
 
 def next_note(current):
