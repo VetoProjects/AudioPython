@@ -48,6 +48,11 @@ that were not present in wavebender. A short list to what is there and how to us
 This submodule contains the basic waveform: sine, square, sawtooth, triangle, damped, 
 white noise and a leaky integrator.
 
+**effects**:
+
+This submodule contains a few basic effects, such as lowpass and highpass and a biquadfilter;
+also delay, flanger and chorus are in there.
+
 **instruments**:
 
 This submodule contains more "high level" interfaces, such as make_melody(which creates a melody
