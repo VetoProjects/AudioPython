@@ -5,6 +5,7 @@ python:
   - "2.7"
 
 script: 
+    - sudo pip install cython
     - make clean
     - make cython
     - python setup.py install
