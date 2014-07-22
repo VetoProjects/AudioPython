@@ -4,11 +4,10 @@ python:
   - "2.6"
   - "2.7"
 
-script: 
+install:
     - sudo pip install cython
-    - make clean
-    - make cython
+
+script: 
     - python setup.py install
-    - make all
     - nosetests
-    - make clean
+    - make clean && make cython && make all && make clean && sudo make install && sudo make uninstall
