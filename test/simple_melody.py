@@ -15,7 +15,7 @@ channels = ((effects.lowpass(waves(), 90),),
 
 samples = compute_samples(channels)
 
-with open("check", "r") as f:
+with open("check.dump", "r") as f:
     p = pickle.Unpickler(f)
     for i, sample in enumerate(yield_raw(samples)):
         if p.load() != sample:
