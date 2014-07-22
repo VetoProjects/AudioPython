@@ -6,4 +6,6 @@ python:
 
 script: 
     - python setup.py install
+    - make all
     - nosetests
+    - make clean

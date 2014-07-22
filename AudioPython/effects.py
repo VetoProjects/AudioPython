@@ -1,5 +1,7 @@
 import math
 
+from itertools import count, izip
+
 from . import util
 
 def leslie(gen, flan=[1.0, 0.0, 0.6, 1.0], nchannels=1, channel=1, frame=0,
@@ -37,20 +39,23 @@ def chorus(gen, dry=0.5, wet=0.5, depth=1.0, delay=25.0, samplerate=44100,
 def flanger(gen, dry=0.5, wet=0.5, depth=25.0, delay=1.0, samplerate=44100,
     last=0.0):
   """Emulates a flanger."""
-  adjust = float(rate) / 1000
-  delay *= mil
-  depth *= mil
+  adjust = float(samplerate) / 1000
+  delay *= adjust
+  depth *= adjust
   for i in gen:
     x = last
     last = i
     i = (i / 2 + 0.5) * depth + delay
-    yield feedback_modulated_delay(data, modwave, dry, wet)
+    yield feedback_modulated_delay(i, x, dry, wet)
 
 def tremolo(gen, dry=0.5, wet=0.5):
   """Emulates a tremolo."""
   for i in gen:
     mod = i / 2 + 0.5
     yield (mod / 2 + 0.5)  * dry + (i * mod) * wet
+
+def feedback_modulated_delay(data, last, dry, wet):
+    return data * dry + last * wet
 
 def modulated_delay(gen, dry, wet, last=0.0):
   """Emulates a modulated delay."""

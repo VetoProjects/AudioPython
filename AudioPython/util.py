@@ -81,8 +81,8 @@ def bipolar(signal):
 
 def mix(a, b, tau):
     """Linear interpolation for two samples."""
-    t = clamp(t, 0.0, 1.0)
-    return a*(1-t) + b*t
+    tau = clamp(tau, 0.0, 1.0)
+    return a * (1 - tau) + b * tau
 
 def clamp(x, mi, ma):
     """Clips a value between minimum and maximum."""
@@ -117,12 +117,12 @@ def next_note(current):
             return i
 
 def grouper(n, iterlist, fillvalue=None):
-	"""
-	Slices iterlist into sublists of length n
-	and groups them if necessary.
-	"""
-	args = [iter(iterlist)] * n
-	return izip_longest(fillvalue=fillvalue, *args)
+    """
+    Slices iterlist into sublists of length n
+    and groups them if necessary.
+    """
+    args = [iter(iterlist)] * n
+    return izip_longest(fillvalue=fillvalue, *args)
 
 def ncycles(iterable, n):
     "Returns the sequence elements n times"
@@ -136,16 +136,16 @@ def note_to_freq(note):
         raise ValueError("No such note. Maybe you chose a flat note?")
 
 def apply_fun(generator, function, args):
-	"""Applies a function to a generator"""
-	while True:
-		yield function(next(generator), *args)
+    """Applies a function to a generator"""
+    while True:
+        yield function(next(generator), *args)
 
 def apply_op(g, h, op):
-	"""Applies the operator to two generators"""
-	if type(op) is str:
-		try:
-			op = op_codes[op]
-		except KeyError:
-			ArithmeticError("No such operation on generators.")
-	while g and h:
-		yield op(next(g), next(h))
+    """Applies the operator to two generators"""
+    if type(op) is str:
+        try:
+            op = op_codes[op]
+        except KeyError:
+            ArithmeticError("No such operation on generators.")
+    while g and h:
+        yield op(next(g), next(h))
