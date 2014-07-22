@@ -15,9 +15,10 @@ hard.
 Table of Contents
 -----------------
 1. **[Requirements](#requirements)**
-2. **[Usage](#usage)**
-3. **[Examples](#examples)**
-4. **[Contribute](#contribute)**
+2. **[Installation](#installation)**
+3. **[Usage](#usage)**
+4. **[Examples](#examples)**
+5. **[Contribute](#contribute)**
 
 Requirements
 ------------
@@ -29,6 +30,14 @@ is a working installation of Python.
 I have not yet concocted setuptools integration, because it really is a subproject for 
 [a live coding editor](https://github.com/hellerve/Veto-LiveCoding) I am currently working on. 
 The module is very well integrated there and should work pretty good. Try it out!
+
+Installation
+------------
+
+Installation is quite simple. First, you'll have to navigate into the dir and install the 
+library via `python setup.py install` as usual. To test your installation(you really might want
+to do that), run `nosetests`. This might take a moment - it takes about 15 seconds on my 4GB RAM
+Macbook.
 
 Usage
 -----
