@@ -1,4 +1,3 @@
-#Makefile largely taken from Zed Shaws great "Learn C The Hard Way"
 CFLAGS=-g -shared -fPIC -I/usr/include/python2.7 -lpython2.7
 PREFIX=/usr/local
 BUILDDIR=bin/
@@ -16,8 +15,15 @@ dev:
 	CFLAGS+=-Wall -Wextra -DNDEBUG -O2
 	make all
 
+#Makes a cython representation of AudioPython
+cython:
+	mkdir csrc
+	cython AudioPython/*.py
+	mv AudioPython/*.c csrc/
+
 #Cleans directory(no uninstall!)
 clean:
+	rm -rf csrc
 	rm -rf bin
 	rm -rf build
 

@@ -5,6 +5,8 @@ python:
   - "2.7"
 
 script: 
+    - make clean
+    - make cython
     - python setup.py install
     - make all
     - nosetests
