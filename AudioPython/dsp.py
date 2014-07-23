@@ -3,7 +3,7 @@
 
 import math
 import random
-from itertools import *
+from itertools import count
 
 from .util import *
 from .effects import *

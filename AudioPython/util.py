@@ -3,15 +3,13 @@
 
 import operator
 import random
-from itertools import *
+from itertools import chain, repeat
 
 # Experimental python3 compatibility.
 try:
-    from itertools import izip
+    from itertools import izip_longest
 except ImportError:
-    izip = zip
-    imap = map
-    izip_longest = zip_longest
+    from itertools import zip_longest as izip_longest
 
 
 """A note lookup table from C0 to B8"""

@@ -3,14 +3,11 @@
 
 import os
 
-from itertools import *
+from itertools import chain, cycle, islice
 
 from .dsp import *
 from .util import *
 from .effects import *
-
-def ncycles(iterable, n):
-    return chain.from_iterable(repeat(tuple(iterable), n))
 
 def make_melody(note_list, length_list=[], amplitude_list=[],
                 bar_length=11025, default_length=0.25,
