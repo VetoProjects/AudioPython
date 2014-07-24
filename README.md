@@ -25,7 +25,10 @@ Requirements
 ------------
 
 All you need is a working Python installation. It works on all versions from 2.5 to 3.4, as 
-far as I know.
+far as I know. Travis says so, at least.
+
+I personally only use 2.7 and 3.3 at the moment, so I am always interessant in feedback regarding
+version support.
 
 Installation
 ------------
@@ -46,7 +49,7 @@ Usage
 To use the library, first do your usual
 
 ```python
-from AudioPython import *
+import AudioPython
 ```
 
 If you are already familiar with wavebender, the transition should be mostly smooth.
