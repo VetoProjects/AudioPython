@@ -56,7 +56,7 @@ def write_wavefile(w, samples, nframes=None, nchannels=2, sampwidth=2, framerate
 
     # split the samples into chunks (to reduce memory consumption and improve performance)
     for chunk in grouper(bufsize, samples):
-        frames = ''.join(''.join(str(struct.pack('h', int(max_amplitude * sample))) for sample in channels) for channels in chunk if channels is not None)
+        frames = b''.join(b''.join(struct.pack('h', int(max_amplitude * sample)) for sample in channels) for channels in chunk if channels is not None)
         w.writeframesraw(frames)
 
     w.close()

@@ -444,12 +444,15 @@ _datawritten -- the size of the audio samples actually written
         nframes = len(data) // (self._sampwidth * self._nchannels)
         if self._convert:
             data = self._convert(data)
-        if self._sampwidth > 1 and big_endian:
+        if self._sampwidth in (2, 4) and big_endian:
             import array
-            data = array.array(_array_fmts[self._sampwidth], data)
+            a = array.array(_array_fmts[self._sampwidth])
             if sys.version[0] > 3:
-                data = _byteswap3(data)
+                a.frombytes(data)
+                data = a
+                data.byteswap()
             else:
+                data = a
                 data.byteswap()
             data.tofile(self._file)
             self._datawritten = self._datawritten + len(data) * self._sampwidth
