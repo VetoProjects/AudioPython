@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import pickle
+import codecs
 
 from AudioPython import *
 from AudioPython import instruments, dsp, effects
@@ -11,19 +12,32 @@ def waves():
             length_list=[l/4, l/4, l/2, l, l/4, l/4, l/2],
             default_amplitude=1.0, bar_length=l)
 
-def test_lowpass_make_melody(path="test/"):
+def test_lowpass_make_melody():
+    dump = make_check()
+
     channels = ((effects.lowpass(waves(), 90),),
             (effects.lowpass(waves(), 90),),)
 
     samples = compute_samples(channels)
 
-    with open(path + "check.dump", "r") as f:
-        p = pickle.Unpickler(f)
-        for i, sample in enumerate(yield_raw(samples)):
-            if p.load() != sample:
-                raise ValueError("%s yielded wrong value on %s call." %
-                        (__file__, i))
-            if i == 1000: break
+    for i, sample in enumerate(yield_raw(samples)):
+        if dump[i] != sample:
+            raise ValueError("%s yielded wrong value on %s call." %
+                    (__file__, i))
+        if i == 1000: break
+
+def make_check():
+    channels = ((effects.lowpass(waves(), 90),),
+            (effects.lowpass(waves(), 90),),)
+
+    samples = compute_samples(channels)
+
+    dump = []
+
+    for i, sample in enumerate(yield_raw(samples)):
+        dump.append(sample)
+        if i == 1000: break
+    return dump
 
 if __name__ == "__main__":
-    test_lowpass_make_melody("")
+    test_lowpass_make_melody()
