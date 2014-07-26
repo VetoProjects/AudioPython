@@ -33,8 +33,8 @@ def make_melody(note_list, length_list=[], amplitude_list=[],
         else:
             amp = default_amplitude
         tones.append(islice(damped_wave(frequency=note, amplitude=amp,
-                                        length=length),
-                            length))
+                                        length=round(length)),
+                            round(length)))
     return cycle(chain(*tones))
 
 def concat_melodies(melodylist):
