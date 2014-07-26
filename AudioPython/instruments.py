@@ -19,23 +19,23 @@ def make_melody(note_list, length_list=[], amplitude_list=[],
         repeated. Make it possible.
     """
     tones = []
-    second_length = len(length_list)
-    third_length = len(amplitude_list)
+    note_length = len(length_list)
+    amp_length = len(amplitude_list)
     for index, note in enumerate(note_list):
         if type(note) is str:
             note = note_to_freq(note)
-        if index < second_length:
+        if index < note_length:
             length = length_list[index]
         else:
             length = default_length
-        if index < third_length:
+        if index < amp_length:
             amp = amplitude_list[index]
         else:
             amp = default_amplitude
         tones.append(islice(damped_wave(frequency=note, amplitude=amp,
                                         length=length),
-                            bar_length))
-    return cycle(chain(chain(*tones)))
+                            length))
+    return cycle(chain(*tones))
 
 def concat_melodies(melodylist):
     """

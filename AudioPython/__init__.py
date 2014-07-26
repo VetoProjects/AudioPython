@@ -47,8 +47,7 @@ def write_wavefile(w, samples, nframes=None, nchannels=2, sampwidth=2, framerate
     if nframes is None:
         nframes = -1
 
-    if type(w) is str:
-        w = wave.open(w, 'w')
+    w = wave.open(w, 'w')
 
     w.setparams((nchannels, sampwidth, framerate, nframes, 'NONE', 'not compressed'))
 
