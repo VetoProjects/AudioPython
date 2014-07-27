@@ -1,19 +1,26 @@
-CFLAGS=-g -shared -fPIC -I/usr/include/python2.7 -lpython2.7
+CFLAGS=-g -shared -fPIC
 PREFIX=/usr
 BUILDDIR=bin/
 
 TARGET=AudioPython.so
 SOURCES=$(wildcard csrc/*.c)
 
-#Makes everything
+#Makes everything(defaults to python3)
 all:
+	make python3
+
+python3:
 	mkdir $(BUILDDIR)
-	g++ $(CFLAGS) $(SOURCES) -o $(BUILDDIR)$(TARGET)
+	$(CC) $(CFLAGS) `python3.3-config --cflags` `python3.3-config --ldflags` $(SOURCES) -o $(BUILDDIR)$(TARGET)
+
+python2:
+	mkdir $(BUILDDIR)
+	$(CC) $(CFLAGS) -I/usr/include/python2.7 -lpython2.7 $(SOURCES) -o $(BUILDDIR)$(TARGET)
 
 #Uses picky extensions and makes everything(Extensions may break compiling)
 dev:
-	CFLAGS+=-Wall -Wextra -DNDEBUG -O2
-	make all
+	EXTRAFLAGS+=-Wall -Wextra -DNDEBUG -O2
+	make all $(EXTRAFLAGS)
 
 #Makes a cython representation of AudioPython
 cython:

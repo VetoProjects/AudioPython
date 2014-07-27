@@ -16,3 +16,4 @@ script:
     - timeout 15s python test/wavetest.py || true
     - rm temp.wav
     - sudo make clean && make cython && make all && sudo make install && sudo make uninstall && sudo make clean
+    - sudo make clean && make cython && make python3 && sudo make install && sudo make uninstall && sudo make clean
