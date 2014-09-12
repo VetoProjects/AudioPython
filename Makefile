@@ -6,8 +6,7 @@ TARGET=AudioPython.so
 SOURCES=$(wildcard csrc/*.c)
 
 #Makes everything(defaults to python3)
-all:
-	make python3
+all: python3
 
 python3:
 	mkdir $(BUILDDIR)
