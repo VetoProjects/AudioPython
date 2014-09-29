@@ -42,7 +42,7 @@ note_lookup = {"C0": 16.35, "C#0": 17.32, "D0": 18.35, "D#0": 19.45,
                "G#8": 6644.88, "A8": 7040.00, "A#8": 7458.62, "B8": 7902.13}
 
 """A lookup table of operations"""
-op_codes = {'>': operator.lt, '>=': operator.le, '==': operator.eq,
+_op_codes = {'>': operator.lt, '>=': operator.le, '==': operator.eq,
             '!=': operator.ne, '<=': operator.ge, '<': operator.gt,
             'not': operator.ne, 'is': operator.eq, '+': operator.add,
             '-': operator.sub, '*': operator.mul, '/': operator.truediv,
@@ -55,7 +55,7 @@ op_codes = {'>': operator.lt, '>=': operator.le, '==': operator.eq,
 A markov matrix for ratios when which cadence is usually played
 (useful for random progressions).
 """
-cadence_markov = [[0, 0, 0.25, 0.25, 0.25, 0.25],
+_cadence_markov = [[0, 0, 0.25, 0.25, 0.25, 0.25],
                   [0, 0, 0, 0, 0.5, 0, 0.5],
                   [0, 0, 0, 0, 0, 1],
                   [0.25, 0.25, 0, 0, 0.25, 0, 0.25],
@@ -107,7 +107,7 @@ def next_note(current):
     sumx = 0
     i = 0
     while sumx < x:
-        sumx += cadence_markov[current][i]
+        sumx += _cadence_markov[current][i]
         i += 1
     return i
 
@@ -139,7 +139,7 @@ def apply_op(g, h, op):
     """Applies the operator to two generators"""
     if type(op) is str:
         try:
-            op = op_codes[op]
+            op = _op_codes[op]
         except KeyError:
             ArithmeticError("No such operation on generators.")
     while g and h:
