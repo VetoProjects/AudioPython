@@ -4,7 +4,7 @@ AudioPython
 ![MIT Licensed!](http://img.shields.io/badge/license-mit-blue.svg)
 ![Version 0.3.1](http://img.shields.io/badge/version-0.3.1-yellow.svg)
 ![Version 0.3.1](http://img.shields.io/badge/python_version-2.5--3.4-green.svg)
-[![Build Status](https://travis-ci.org/hellerve/AudioPython.png?branch=master)](https://travis-ci.org/hellerve/AudioPython)
+[![Build Status](https://travis-ci.org/VeotProjects/AudioPython.png?branch=master)](https://travis-ci.org/VetoProjects/AudioPython)
 
 An audio module for Python that is included in a Live Coding Environment we currently work on;
 it is based on [wavebender](https://github.com/zacharydenton/wavebender/) and relies heavily
