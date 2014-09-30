@@ -41,27 +41,30 @@ note_lookup = {"C0": 16.35, "C#0": 17.32, "D0": 18.35, "D#0": 19.45,
                "E8": 5274.04, "F8": 5587.65, "F#8": 5919.91, "G8": 6271.93,
                "G#8": 6644.88, "A8": 7040.00, "A#8": 7458.62, "B8": 7902.13}
 
+
 """A lookup table of operations"""
 _op_codes = {'>': operator.lt, '>=': operator.le, '==': operator.eq,
-            '!=': operator.ne, '<=': operator.ge, '<': operator.gt,
-            'not': operator.ne, 'is': operator.eq, '+': operator.add,
-            '-': operator.sub, '*': operator.mul, '/': operator.truediv,
-            '//': operator.floordiv, '%': operator.mod, '<<': operator.lshift,
-            '>>': operator.rshift, '|': operator.or_, '&':operator.and_,
-            'or': operator.or_, 'and': operator.and_, '**': operator.pow,
-            '^': operator.xor, 'xor': operator.xor}
+             '!=': operator.ne, '<=': operator.ge, '<': operator.gt,
+             'not': operator.ne, 'is': operator.eq, '+': operator.add,
+             '-': operator.sub, '*': operator.mul, '/': operator.truediv,
+             '//': operator.floordiv, '%': operator.mod, '<<': operator.lshift,
+             '>>': operator.rshift, '|': operator.or_, '&': operator.and_,
+             'or': operator.or_, 'and': operator.and_, '**': operator.pow,
+             '^': operator.xor, 'xor': operator.xor}
+
 
 """
 A markov matrix for ratios when which cadence is usually played
 (useful for random progressions).
 """
 _cadence_markov = [[0, 0, 0.25, 0.25, 0.25, 0.25],
-                  [0, 0, 0, 0, 0.5, 0, 0.5],
-                  [0, 0, 0, 0, 0, 1],
-                  [0.25, 0.25, 0, 0, 0.25, 0, 0.25],
-                  [0.5, 0, 0, 0, 0, 0.5],
-                  [0, 0.5, 0, 0.5],
-                  [0.5, 0, 0, 0, 0.5]]
+                   [0, 0, 0, 0, 0.5, 0, 0.5],
+                   [0, 0, 0, 0, 0, 1],
+                   [0.25, 0.25, 0, 0, 0.25, 0, 0.25],
+                   [0.5, 0, 0, 0, 0, 0.5],
+                   [0, 0.5, 0, 0.5],
+                   [0.5, 0, 0, 0, 0.5]]
+
 
 def unipolar(signal):
     """
@@ -70,6 +73,7 @@ def unipolar(signal):
     """
     return signal * 0.5 + 0.5
 
+
 def bipolar(signal):
     """
     Inverse to unipolar().
@@ -77,19 +81,23 @@ def bipolar(signal):
     """
     return signal * 2.0 - 1.0
 
+
 def mix(a, b, tau):
     """Linear interpolation for two samples."""
     tau = clamp(tau, 0.0, 1.0)
     return a * (1 - tau) + b * tau
 
+
 def clamp(x, mi, ma):
     """Clips a value between minimum and maximum."""
     return max(mi, min(ma, x))
+
 
 def sync():
     """Resets phase with another signal."""
     previous = 0
     start = 0
+
     def internal(signal, tau, previous=previous, start=start):
         """I know. Named keywords are only there because of cython."""
         if previous < 0 and signal >= 0:
@@ -97,6 +105,7 @@ def sync():
         previous = signal
         yield tau - start
     return internal
+
 
 def next_note(current):
     """Returns a random next note for the currently played note."""
@@ -111,6 +120,7 @@ def next_note(current):
         i += 1
     return i
 
+
 def grouper(n, iterlist, fillvalue=None):
     """
     Slices iterlist into sublists of length n
@@ -119,9 +129,11 @@ def grouper(n, iterlist, fillvalue=None):
     args = [iter(iterlist)] * n
     return izip_longest(fillvalue=fillvalue, *args)
 
+
 def ncycles(iterable, n):
     "Returns the sequence elements n times"
     return chain.from_iterable(repeat(tuple(iterable), n))
+
 
 def note_to_freq(note):
     """Translates a note to a corresponding frequency"""
@@ -130,10 +142,12 @@ def note_to_freq(note):
     except KeyError:
         raise ValueError("No such note. Maybe you chose a flat note?")
 
+
 def apply_fun(generator, function, args):
     """Applies a function to a generator"""
     while True:
         yield function(next(generator), *args)
+
 
 def apply_op(g, h, op):
     """Applies the operator to two generators"""

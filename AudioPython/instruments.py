@@ -9,6 +9,7 @@ from .dsp import *
 from .util import *
 from .effects import *
 
+
 def make_melody(note_list, length_list=[], amplitude_list=[],
                 bar_length=11025, default_length=0.25,
                 default_amplitude=0.5):
@@ -37,12 +38,14 @@ def make_melody(note_list, length_list=[], amplitude_list=[],
                             round(length)))
     return cycle(chain(*tones))
 
+
 def concat_melodies(melodylist):
     """
     Concatenates two or melodies and returns a
     cycle of those.
     """
     return cycle(chain(*melodylist))
+
 
 def hammond(frequency, drawbar_positions):
     """
@@ -54,6 +57,7 @@ def hammond(frequency, drawbar_positions):
         drawbars + (sine_wave(frequency=freq_ratio[i]*frequency,
                               amplitude=drawbar_positions[i]/9),)
     return leslie(gen)
+
 
 def random_progression(scale, start=1, gen=damped_wave, args=None):
     """
@@ -76,19 +80,21 @@ def random_progression(scale, start=1, gen=damped_wave, args=None):
         else:
             yield gen(current)
 
+
 def make_instrument(suffix, directory_name, path="./instruments/"):
     """Creates a dict of samples that can be played by the instrument"""
     search = re.compile(".*" + suffix)
     resuffix = re.compile(suffix)
     matches = filter(lambda x: search.match(x),
-                os.listdir(path + directory_name))
+                     os.listdir(path + directory_name))
     names = [resuffix.split(i)[0] for i in matches]
     sampledict = {}
     for name in names:
         search = re.compile(name + suffix)
         sampledict[name] = filter(lambda x: search.match(x),
-                                os.listdir(path + directory_name))
+                                  os.listdir(path + directory_name))
     return sampledict
+
 
 def get_sample(name, sampledict, loudness=0.5):
     """Gets a sample for a note of the instrument at a given loudness"""

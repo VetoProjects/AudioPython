@@ -20,5 +20,3 @@ setup(
     license="MIT",
     platforms=['Linux', 'OS X', 'Windows']
 )
-
-
