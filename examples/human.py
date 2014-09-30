@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-#Idea taken from www.wavepot.com
+# Idea taken from www.wavepot.com
 
 import math
 
 from AudioPython import *
 from AudioPython.dsp import *
+
 
 def bass_osc(n):
     tri = triangle_wave(frequency=n, amplitude=0.24)
@@ -12,13 +13,15 @@ def bass_osc(n):
     while True:
         yield next(tri) + next(sine)
 
+
 def sub(gen, amp):
     c = 0
     tau = 2 * math.pi
     while True:
         c += 0.000014
         yield math.sin(next(gen) * (1 + math.sin(1.1337 * c * tau)) * (2 + (1 +
-                math.sin(0.42 * c * tau)) * 15) + tau * c) * amp
+                       math.sin(0.42 * c * tau)) * 15) + tau * c) * amp
+
 
 n = 44100 / 500
 
