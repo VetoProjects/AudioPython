@@ -3,6 +3,7 @@ from AudioPython import *
 from AudioPython.dsp import *
 import sys
 
+
 def test_pink_noise():
     channels = ((pink_noise(amplitude=0.01),),)
 
