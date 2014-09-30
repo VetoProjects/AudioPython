@@ -85,7 +85,7 @@ except NameError:
     str = str
     unicode = str
     bytes = bytes
-    basestring = (str,bytes)
+    basestring = (str, bytes)
 else:
     # 'unicode' exists, must be Python 2
     str = str
@@ -96,15 +96,20 @@ else:
 
 __all__ = ["open", "openfp", "Error"]
 
+
 class Error(Exception):
     pass
 
+
 WAVE_FORMAT_PCM = 0x0001
+
 
 _array_fmts = None, 'b', 'h', None, 'l'
 
+
 # Determine endian-ness
 import struct
+
 if struct.pack("h", 1) == "\000\001":
     big_endian = 1
 else:
@@ -113,11 +118,13 @@ else:
 import sys
 from chunk import Chunk
 
+
 def _byteswap3(data):
     ba = bytearray(data)
     ba[::3] = data[2::3]
     ba[2::3] = data[::3]
     return bytes(ba)
+
 
 class Wave_read:
     """Variables used in this class:
@@ -152,7 +159,7 @@ _framesize -- size of one frame in the file
     def initfp(self, file):
         self._convert = None
         self._soundpos = 0
-        self._file = Chunk(file, bigendian = 0)
+        self._file = Chunk(file, bigendian=0)
         if self._file.getname() != 'RIFF':
             raise Error('file does not start with RIFF id')
         if self._file.read(4) != 'WAVE':
@@ -162,7 +169,7 @@ _framesize -- size of one frame in the file
         while 1:
             self._data_seek_needed = 1
             try:
-                chunk = Chunk(self._file, bigendian = 0)
+                chunk = Chunk(self._file, bigendian=0)
             except EOFError:
                 break
             chunkname = chunk.getname()
@@ -198,6 +205,7 @@ _framesize -- size of one frame in the file
     #
     # User visible methods.
     #
+
     def getfp(self):
         return self._file
 
@@ -234,8 +242,8 @@ _framesize -- size of one frame in the file
 
     def getparams(self):
         return self.getnchannels(), self.getsampwidth(), \
-               self.getframerate(), self.getnframes(), \
-               self.getcomptype(), self.getcompname()
+            self.getframerate(), self.getnframes(), \
+            self.getcomptype(), self.getcompname()
 
     def getmarkers(self):
         return None
@@ -280,7 +288,8 @@ _framesize -- size of one frame in the file
             data = self._data_chunk.read(nframes * self._framesize)
         if self._convert and data:
             data = self._convert(data)
-        self._soundpos = self._soundpos + len(data) // (self._nchannels * self._sampwidth)
+        self._soundpos = (self._soundpos + len(data) //
+                          (self._nchannels * self._sampwidth))
         return data
 
     #
@@ -288,7 +297,8 @@ _framesize -- size of one frame in the file
     #
 
     def _read_fmt_chunk(self, chunk):
-        wFormatTag, self._nchannels, self._framerate, dwAvgBytesPerSec, wBlockAlign = struct.unpack('<hhllh', chunk.read(14))
+        (wFormatTag, self._nchannels, self._framerate, dwAvgBytesPerSec,
+            wBlockAlign) = struct.unpack('<hhllh', chunk.read(14))
         if wFormatTag == WAVE_FORMAT_PCM:
             sampwidth = struct.unpack('<h', chunk.read(2))[0]
             self._sampwidth = (sampwidth + 7) // 8
@@ -297,6 +307,7 @@ _framesize -- size of one frame in the file
         self._framesize = self._nchannels * self._sampwidth
         self._comptype = 'NONE'
         self._compname = 'not compressed'
+
 
 class Wave_write:
     """Variables used in this class:
@@ -425,7 +436,7 @@ _datawritten -- the size of the audio samples actually written
         if not self._nchannels or not self._sampwidth or not self._framerate:
             raise Error('not all parameters set')
         return self._nchannels, self._sampwidth, self._framerate, \
-              self._nframes, self._comptype, self._compname
+            self._nframes, self._comptype, self._compname
 
     def setmark(self, id, pos, name):
         raise Error('setmark() not supported')
@@ -495,19 +506,22 @@ _datawritten -- the size of the audio samples actually written
         if sys.version_info[0] < 3:
             self._file.write('RIFF')
             if not self._nframes:
-                self._nframes = initlength / (self._nchannels * self._sampwidth)
-            self._datalength = self._nframes * self._nchannels * self._sampwidth
+                self._nframes = (initlength /
+                                 (self._nchannels * self._sampwidth))
+            self._datalength = (self._nframes *
+                                self._nchannels * self._sampwidth)
             self._form_length_pos = 4
             wave_header_format = '<l4s4slhhllhh4s'
             self._file.write(struct.pack(wave_header_format,
-                36 + self._datalength, 'WAVE', 'fmt ', 16,
-                WAVE_FORMAT_PCM, self._nchannels, self._framerate,
-                self._nchannels * self._framerate * self._sampwidth,
-                self._nchannels * self._sampwidth,
-                self._sampwidth * 8, 'data'))
-            self._data_length_pos = (
-                struct.calcsize(wave_header_format) +
-                self._form_length_pos)
+                                         36 + self._datalength, 'WAVE',
+                                         'fmt ', 16, WAVE_FORMAT_PCM,
+                                         self._nchannels, self._framerate,
+                                         (self._nchannels * self._framerate *
+                                          self._sampwidth),
+                                         self._nchannels * self._sampwidth,
+                                         self._sampwidth * 8, 'data'))
+            self._data_length_pos = (struct.calcsize(wave_header_format) +
+                                     self._form_length_pos)
             self._file.write(struct.pack('<l', self._datalength))
         else:
             self._write_header3(initlength)
@@ -520,14 +534,15 @@ _datawritten -- the size of the audio samples actually written
         self._form_length_pos = 4
         wave_header_format = '<L4s4sLHHLLHH4s'
         self._file.write(struct.pack('<L4s4sLHHLLHH4s',
-            36 + self._datalength, b'WAVE', b'fmt ', 16,
-            WAVE_FORMAT_PCM, self._nchannels, self._framerate,
-            self._nchannels * self._framerate * self._sampwidth,
-            self._nchannels * self._sampwidth,
-            self._sampwidth * 8, b'data'))
-        self._data_length_pos = (
-            struct.calcsize(wave_header_format) +
-            self._form_length_pos)
+                                     36 + self._datalength, b'WAVE', b'fmt ',
+                                     16, WAVE_FORMAT_PCM, self._nchannels,
+                                     self._framerate,
+                                     (self._nchannels * self._framerate *
+                                      self._sampwidth),
+                                     self._nchannels * self._sampwidth,
+                                     self._sampwidth * 8, b'data'))
+        self._data_length_pos = (struct.calcsize(wave_header_format) +
+                                 self._form_length_pos)
         self._file.write(struct.pack('<l', self._datalength))
 
     def _patchheader(self):
@@ -540,6 +555,7 @@ _datawritten -- the size of the audio samples actually written
         self._file.write(struct.pack('<l', self._datawritten))
         self._file.seek(curpos, 0)
         self._datalength = self._datawritten
+
 
 def open(f, mode=None):
     if mode is None:
@@ -554,4 +570,4 @@ def open(f, mode=None):
     else:
         raise Error("mode must be 'r', 'rb', 'w', or 'wb'")
 
-openfp = open # B/W compatibility
+openfp = open  # B/W compatibility
