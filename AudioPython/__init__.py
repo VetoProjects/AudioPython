@@ -19,9 +19,9 @@ except ImportError:
     izip_longest = zip_longest
 
 __author__ = 'Veit Heller'
-__author_mail__ = 'veit.heller@student.htw-berlin.de'
+__author_mail__ = 'veit@veitheller.de'
 __version__ = '0.3.1'
-__url__ = 'http://github.com/hellerve/AudioPython'
+__url__ = 'http://github.com/VetoProjects/AudioPython'
 __longdescr__ = """
                 An audio library based on wave-bender
                 (https://github.com/zacharydenton/wavebender)
