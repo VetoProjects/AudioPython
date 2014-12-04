@@ -68,10 +68,7 @@ def random_progression(scale, start=1, gen=damped_wave, args=None):
     for i in scale:
         if type(i) is str:
             i = note_to_freq(i)
-    if start < 1:
-        start = 1
-    if start > 7:
-        start = 7
+    start = clamp(start, 1, 7)
     current = scale[start-1]
     while True:
         current = scale[next_note(current)]
@@ -98,10 +95,7 @@ def make_instrument(suffix, directory_name, path="./instruments/"):
 
 def get_sample(name, sampledict, loudness=0.5):
     """Gets a sample for a note of the instrument at a given loudness"""
-    if loudness > 1.0:
-        loudness = 1.0
-    if loudness < 0.0:
-        loudness = 0.0
+    loudness = clamp(loudness, 0, 1)
     samples = sampledict[name]
     if len(samples) != 0:
         comp = 1.0/len(samples)
