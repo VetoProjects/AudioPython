@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-"""Stuff to parse WAVE files.
+"""
+Stuff to parse WAVE files.
 
 Usage.
 
@@ -127,35 +128,36 @@ def _byteswap3(data):
 
 
 class Wave_read:
-    """Variables used in this class:
+    """
+    Variables used in this class:
 
-These variables are available to the user though appropriate
-methods of this class:
-_file -- the open file with methods read(), close(), and seek()
-set through the __init__() method
-_nchannels -- the number of audio channels
-available through the getnchannels() method
-_nframes -- the number of audio frames
-available through the getnframes() method
-_sampwidth -- the number of bytes per audio sample
-available through the getsampwidth() method
-_framerate -- the sampling frequency
-available through the getframerate() method
-_comptype -- the AIFF-C compression type ('NONE' if AIFF)
-available through the getcomptype() method
-_compname -- the human-readable AIFF-C compression type
-available through the getcomptype() method
-_soundpos -- the position in the audio stream
-available through the tell() method, set through the
-setpos() method
+    These variables are available to the user though appropriate
+    methods of this class:
+    _file -- the open file with methods read(), close(), and seek()
+    set through the __init__() method
+    _nchannels -- the number of audio channels
+    available through the getnchannels() method
+    _nframes -- the number of audio frames
+    available through the getnframes() method
+    _sampwidth -- the number of bytes per audio sample
+    available through the getsampwidth() method
+    _framerate -- the sampling frequency
+    available through the getframerate() method
+    _comptype -- the AIFF-C compression type ('NONE' if AIFF)
+    available through the getcomptype() method
+    _compname -- the human-readable AIFF-C compression type
+    available through the getcomptype() method
+    _soundpos -- the position in the audio stream
+    available through the tell() method, set through the
+    setpos() method
 
-These variables are used internally only:
-_fmt_chunk_read -- 1 iff the FMT chunk has been read
-_data_seek_needed -- 1 iff positioned correctly in audio
-file for readframes()
-_data_chunk -- instantiation of a chunk class for the DATA chunk
-_framesize -- size of one frame in the file
-"""
+    These variables are used internally only:
+    _fmt_chunk_read -- 1 iff the FMT chunk has been read
+    _data_seek_needed -- 1 iff positioned correctly in audio
+    file for readframes()
+    _data_chunk -- instantiation of a chunk class for the DATA chunk
+    _framesize -- size of one frame in the file
+    """
     def initfp(self, file):
         self._convert = None
         self._soundpos = 0
@@ -310,31 +312,31 @@ _framesize -- size of one frame in the file
 
 
 class Wave_write:
-    """Variables used in this class:
+    """
+    Variables used in this class:
 
-These variables are user settable through appropriate methods
-of this class:
-_file -- the open file with methods write(), close(), tell(), seek()
-set through the __init__() method
-_comptype -- the AIFF-C compression type ('NONE' in AIFF)
-set through the setcomptype() or setparams() method
-_compname -- the human-readable AIFF-C compression type
-set through the setcomptype() or setparams() method
-_nchannels -- the number of audio channels
-set through the setnchannels() or setparams() method
-_sampwidth -- the number of bytes per audio sample
-set through the setsampwidth() or setparams() method
-_framerate -- the sampling frequency
-set through the setframerate() or setparams() method
-_nframes -- the number of audio frames written to the header
-set through the setnframes() or setparams() method
+    These variables are user settable through appropriate methods
+    of this class:
+    _file -- the open file with methods write(), close(), tell(), seek()
+    set through the __init__() method
+    _comptype -- the AIFF-C compression type ('NONE' in AIFF)
+    set through the setcomptype() or setparams() method
+    _compname -- the human-readable AIFF-C compression type
+    set through the setcomptype() or setparams() method
+    _nchannels -- the number of audio channels
+    set through the setnchannels() or setparams() method
+    _sampwidth -- the number of bytes per audio sample
+    set through the setsampwidth() or setparams() method
+    _framerate -- the sampling frequency
+    set through the setframerate() or setparams() method
+    _nframes -- the number of audio frames written to the header
+    set through the setnframes() or setparams() method
 
-These variables are used internally only:
-_datalength -- the size of the audio samples written to the header
-_nframeswritten -- the number of frames actually written
-_datawritten -- the size of the audio samples actually written
-"""
-
+    These variables are used internally only:
+    _datalength -- the size of the audio samples written to the header
+    _nframeswritten -- the number of frames actually written
+    _datawritten -- the size of the audio samples actually written
+    """
     def __init__(self, f):
         self._i_opened_the_file = None
         if isinstance(f, basestring):
