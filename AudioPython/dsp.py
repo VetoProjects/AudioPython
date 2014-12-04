@@ -17,10 +17,7 @@ def sine_wave(frequency=440.0, framerate=44100, amplitude=0.5,
     if type(frequency) is str:
         frequency = note_to_freq(frequency)
 
-    if amplitude > 1.0:
-        amplitude = 1.0
-    if amplitude < 0.0:
-        amplitude = 0.0
+    amplitude = clamp(amplitude, 0, 1)
     for i in count(skip_frame):
         sine = math.sin(math.pi * float(frequency) *
                         (float(i) / float(framerate)))
@@ -42,10 +39,7 @@ def damped_wave(frequency=440.0, framerate=44100, amplitude=0.5,
     """
     Generates a damped wave at a given frequency of infinite length.
     """
-    if amplitude > 1.0:
-        amplitude = 1.0
-    if amplitude < 0.0:
-        amplitude = 0.0
+    amplitude = clamp(amplitude, 0, 1)
     return (math.exp(-(float(i % length)/float(framerate))) *
             s for i, s in enumerate(sine_wave(frequency,
                                     framerate, amplitude, skipframe)))
@@ -58,10 +52,7 @@ def sawtooth_wave(frequency=440.0, framerate=44100, amplitude=0.5,
     """
     if type(frequency) is str:
         frequency = note_to_freq(frequency)
-    if amplitude > 1.0:
-        amplitude = 1.0
-    if amplitude < 0.0:
-        amplitude = 0.0
+    amplitude = clamp(amplitude, 0, 1)
     while True:
         degree = (2.0 * math.pi * float(frequency) *
                   (float(i) / float(framerate)) % 360.0) / 360
@@ -86,10 +77,7 @@ def triangle_wave(frequency=440.0, framerate=44100, amplitude=0.5,
     """
     if type(frequency) is str:
         frequency = note_to_freq(frequency)
-    if amplitude > 1.0:
-        amplitude = 1.0
-    if amplitude < 0.0:
-        amplitude = 0.0
+    amplitude = clamp(amplitude, 0, 1)
     while True:
         skip_frame += 0.0000114  # coefficient i found by playing around
         yield (abs(1 - (2 * skip_frame * frequency) % 2) * 2 - 1) * amplitude
@@ -97,19 +85,13 @@ def triangle_wave(frequency=440.0, framerate=44100, amplitude=0.5,
 
 def white_noise(amplitude=0.5):
     """Generates random samples."""
-    if amplitude > 1.0:
-        amplitude = 1.0
-    if amplitude < 0.0:
-        amplitude = 0.0
+    amplitude = clamp(amplitude, 0, 1)
     return (float(amplitude) * random.uniform(-1, 1) for i in count(0))
 
 
 def pink_noise(amplitude=0.5, ranged=128):
     """Generates pink noise based on Voss' algorithm."""
-    if amplitude > 1.0:
-        amplitude = 1.0
-    if amplitude < 0.0:
-        amplitude = 0.0
+    amplitude = clamp(amplitude, 0, 1)
     max_pos = 0x1f  # five bits set
     pos = 0
     white_values = [0, 0, 0, 0, 0]
