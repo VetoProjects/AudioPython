@@ -6,12 +6,12 @@ AudioPython
 ![Version 0.3.1](http://img.shields.io/badge/python_version-2.5--3.4-green.svg)
 [![Build Status](https://travis-ci.org/VetoProjects/AudioPython.png?branch=master)](https://travis-ci.org/VetoProjects/AudioPython)
 
-An audio module for Python that is included in a Live Coding Environment we currently work on;
+This repository contains an audio module for Python that is included in VetoLC;
 it is based on [wavebender](https://github.com/zacharydenton/wavebender/) and relies heavily
 on such constructs as itertools, generators and lambdas, all in all it is based on the
 functional parts of Python - Guido would hate it. Note that it is in development and
-not really usable up until now although you can create really neat sounds if you work really
-hard.
+not really usable up until now although you can create really neat sounds if you work hard
+enough.
 
 Table of Contents
 -----------------
