@@ -1,4 +1,4 @@
-CFLAGS=-g -shared -fPIC
+override CFLAGS=-g -shared -fPIC
 PREFIX=/usr
 BUILDDIR=bin/
 
@@ -18,8 +18,7 @@ python2:
 
 #Uses picky extensions and makes everything(Extensions may break compiling)
 dev:
-	EXTRAFLAGS+=-Wall -Wextra -DNDEBUG -O2
-	make all $(EXTRAFLAGS)
+	make all CFLAGS+="-Wall -Wextra -DNDEBUG -O2"
 
 #Makes a cython representation of AudioPython
 cython:
