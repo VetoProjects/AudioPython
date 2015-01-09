@@ -1,9 +1,4 @@
-from opcode import opmap, HAVE_ARGUMENT, EXTENDED_ARG, STORE_GLOBAL, BUILD_TUPLE, JUMP_FORWARD, LOAD_ATTR, LOAD_GLOBAL
-try:
-    from _types import FunctionType, ClassType
-except:
-    from _types import FunctionType, ClassType
-
+from opcode import opmap, HAVE_ARGUMENT, EXTENDED_ARG
 globals().update(opmap)
 
 def _make_constants(f, builtin_only=False, stoplist=[], verbose=False):

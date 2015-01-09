@@ -19,4 +19,4 @@ script:
     # Timeout returns 124, but we want it to timeout and return 0; hacky
     - timeout 15s python test/wavetest.py || true
     - rm temp.wav
-    - sudo make clean && make cython && make python2 && sudo make install && sudo make uninstall && sudo make clean
+    - sudo make clean && make python2 && sudo make install && sudo make uninstall && sudo make clean
