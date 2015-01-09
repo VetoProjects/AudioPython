@@ -74,6 +74,8 @@ The close() method is called automatically when the class instance
 is destroyed.
 """
 
+from .optimize import make_constants
+
 try:
     import __builtin__
 except ImportError:
@@ -452,6 +454,7 @@ class Wave_write:
     def tell(self):
         return self._nframeswritten
 
+    @make_constants()
     def writeframesraw(self, data):
         self._ensure_header_written(len(data))
         nframes = len(data) // (self._sampwidth * self._nchannels)

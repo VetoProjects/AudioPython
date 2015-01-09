@@ -9,6 +9,7 @@ from itertools import *
 from . import wave
 from .util import *
 from .dsp import *
+from .optimize import *
 
 # Experimental python3 compatibility.
 try:
@@ -32,6 +33,7 @@ __classifiers__ = ['Topic :: Multimedia :: Sound/Audio',
 __keywords__ = ['audio', 'live coding', 'music']
 
 
+@make_constants(True)
 def compute_samples(channels, nsamples=None):
     """
     Creates a generator which computes the samples.
@@ -43,6 +45,7 @@ def compute_samples(channels, nsamples=None):
                   nsamples)
 
 
+@make_constants()
 def write_wavefile(w, samples, nframes=None, nchannels=2, sampwidth=2,
                    framerate=44100, bufsize=2048):
     """Write samples to a wavefile."""
@@ -68,6 +71,7 @@ def write_wavefile(w, samples, nframes=None, nchannels=2, sampwidth=2,
     w.close()
 
 
+@make_constants()
 def yield_raw(samples, nframes=None, nchannels=2, sampwidth=2,
               framerate=44100, bufsize=2048):
     """Yield Raw Samples."""
@@ -84,6 +88,7 @@ def yield_raw(samples, nframes=None, nchannels=2, sampwidth=2,
         yield frames
 
 
+@make_constants()
 def write_pcm(f, samples, sampwidth=2, framerate=44100, bufsize=2048):
     """Write samples as raw PCM data."""
     max_amplitude = float(int((2 ** (sampwidth * 8)) / 2) - 1)
