@@ -8,11 +8,11 @@ SOURCES=$(wildcard csrc/*.c)
 #Makes everything(defaults to python3)
 all: python3
 
-python3:
+python3: cython
 	mkdir $(BUILDDIR)
-	$(CC) $(CFLAGS) `python3.3-config --cflags` `python3.3-config --ldflags` $(SOURCES) -o $(BUILDDIR)$(TARGET)
+	$(CC) $(CFLAGS) `python3.4-config --cflags` `python3.4-config --ldflags` $(SOURCES) -o $(BUILDDIR)$(TARGET)
 
-python2:
+python2: cython
 	mkdir $(BUILDDIR)
 	$(CC) $(CFLAGS) -I/usr/include/python2.7 -lpython2.7 $(SOURCES) -o $(BUILDDIR)$(TARGET)
 
