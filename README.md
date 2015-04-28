@@ -9,7 +9,7 @@ AudioPython
 This repository contains an audio module for Python that is included in VetoLC;
 it is based on [wavebender](https://github.com/zacharydenton/wavebender/) and relies heavily
 on such constructs as itertools, generators and lambdas, all in all it is based on the
-functional parts of Python - Guido would hate it. Note that it is in development and
+"functional parts" of Python. Note that it is in development and
 not really usable up until now although you can create really neat sounds if you work hard
 enough.
 
@@ -27,7 +27,7 @@ Requirements
 All you need is a working Python installation. It works on all versions from 2.5 to 3.4, as 
 far as we know. Travis says so, at least.
 
-We as maintainers only use 2.7 and 3.3 at the moment, so we're am always interessted in feedback regarding
+We as maintainers only use 2.7, 3.3 and 3.4 at the moment, so we're am always interessted in feedback regarding
 version support.
 
 Installation
