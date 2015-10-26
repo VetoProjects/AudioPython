@@ -463,7 +463,7 @@ class Wave_write:
         if self._sampwidth in (2, 4) and big_endian:
             import array
             a = array.array(_array_fmts[self._sampwidth])
-            if sys.version[0] > 3:
+            if sys.version_info[0] > 2:
                 a.frombytes(data)
                 data = a
                 data.byteswap()
