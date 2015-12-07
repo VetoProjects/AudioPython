@@ -1,7 +1,8 @@
 language: python
 
 os:
-  - osx
+  # travis does not support python on os x
+  #- osx
   - linux
 
 python:
